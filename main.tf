@@ -2,7 +2,7 @@
 terraform {
   required_providers {
     azurerm = {
-      source = "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~>2.0"
     }
   }
@@ -40,36 +40,36 @@ resource "azurerm_subnet" "subnet" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 resource "azurerm_network_security_group" "myterraformnsg" {
-    name                = "myNetworkSecurityGroup"
-    location            = azurerm_resource_group.rg.location
-    resource_group_name = azurerm_resource_group.rg.name
+  name                = "myNetworkSecurityGroup"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 
-    security_rule {
-        name                       = "RDP"
-        priority                   = 1001
-        direction                  = "Inbound"
-        access                     = "Allow"
-        protocol                   = "Tcp"
-        source_port_range          = "*"
-        destination_port_range     = "3389"
-        source_address_prefix      = "*"
-        destination_address_prefix = "*"
-    }
+  security_rule {
+    name                       = "RDP"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 
-    // tags = {
-    //     environment = "Terraform Demo"
-    // }
+  // tags = {
+  //     environment = "Terraform Demo"
+  // }
 }
 resource "azurerm_public_ip" "myterraformpublicip" {
-    name                         = "myPublicIP"
-    location            = azurerm_resource_group.rg.location
-    resource_group_name = azurerm_resource_group.rg.name
+  name                = "myPublicIP"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 
-    allocation_method            = "Dynamic"
+  allocation_method = "Dynamic"
 
-    // tags = {
-    //     environment = "Terraform Demo"
-    // }
+  // tags = {
+  //     environment = "Terraform Demo"
+  // }
 }
 
 ## <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html>
@@ -86,8 +86,8 @@ resource "azurerm_network_interface" "example" {
   }
 }
 resource "azurerm_network_interface_security_group_association" "example1" {
-    network_interface_id      = azurerm_network_interface.example.id
-    network_security_group_id = azurerm_network_security_group.myterraformnsg.id
+  network_interface_id      = azurerm_network_interface.example.id
+  network_security_group_id = azurerm_network_security_group.myterraformnsg.id
 }
 ## <https://www.terraform.io/docs/providers/azurerm/r/windows_virtual_machine.html>
 resource "azurerm_windows_virtual_machine" "example" {
